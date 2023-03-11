@@ -40,7 +40,7 @@ impute <- function(model,
   }
   recruitment_rate <- model$recruitment_rate
   group_ids <- model$group_id
-  if (is.null(now)) { # convert to visits and take the last time point
+  if (is.null(now)) { # take the last time point
     now <- max(data$t)
   }
   if (is.null(sample)) {
@@ -159,7 +159,8 @@ impute <- function(model,
     # sample using C++ implementation
     res <- impute_srp_model(data, response_probabilities, shapes, scales,
                             visit_spacing = model$visit_spacing,
-                            max_time = model$maximal_time
+                            max_time = model$maximal_time,
+                            states = model$states
       ) %>%
       as_tibble() %>%
       mutate(

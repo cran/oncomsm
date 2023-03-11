@@ -14,26 +14,38 @@
 
 <title>Prior Choice</title>
 
-<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
 
 <style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-    </style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
 
 
 
 <style type="text/css">
-  code {
-    white-space: pre;
-  }
-  .sourceCode {
-    overflow: visible;
-  }
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
@@ -51,55 +63,54 @@ pre > code.sourceCode { white-space: pre-wrap; }
 pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
-  { counter-reset: source-line 0; }
+{ counter-reset: source-line 0; }
 pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
+{ position: relative; left: -4em; counter-increment: source-line; }
 pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
 div.sourceCode
-  {   }
+{ }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
 </style>
 <script>
 // apply pandoc div.sourceCode style to pre.sourceCode instead
@@ -133,7 +144,187 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
 
 
 
@@ -153,43 +344,110 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(oncomsm)</span></code></pre></div>
-<p><strong>tl;dr:</strong> <em>Identification of the shape parameter is difficult settings with little data and it is thus recommended to restrict the shape parameter to <span class="math inline">\(1\)</span> (exponential model) if no historical data for the construction of an informative prior is available. A beta-mixture prior is suggested for the response probability and log-normal priors on shape and median time-to-next-event for the time-to-event components.</em></p>
+<p><strong>tl;dr:</strong> <em>Identification of the shape parameter is
+difficult settings with little data and it is thus recommended to
+restrict the shape parameter to <span class="math inline">\(1\)</span>
+(exponential model) if no historical data for the construction of an
+informative prior is available. A beta-mixture prior is suggested for
+the response probability and log-normal priors on shape and median
+time-to-next-event for the time-to-event components.</em></p>
 <div id="why-weibull-transition-times" class="section level2">
 <h2>Why Weibull transition times?</h2>
-<p>In <code>oncomsm</code>, the distributions of the between-state transition times are modeled as Weibull distributions. This restriction in terms of the class of distribution is an implicit prior on the transition times. The rationale is mainly due to a trade-off between model flexibility and model complexity. The Weibull family is a two parameter distribution family where the probability density function is given by</p>
+<p>In <code>oncomsm</code>, the distributions of the between-state
+transition times are modeled as Weibull distributions. This restriction
+in terms of the class of distribution is an implicit prior on the
+transition times. The rationale is mainly due to a trade-off between
+model flexibility and model complexity. The Weibull family is a two
+parameter distribution family where the probability density function is
+given by</p>
 <p><span class="math display">\[
-f(t|a,b) = \frac a b \bigg(\frac t b\bigg)^{a - 1} e^{-\big(\frac t b\big)^a} \quad t &gt; 0
-\]</span> where <span class="math inline">\(a\)</span> is the shape and <span class="math inline">\(b\)</span> the scale parameter. The corresponding hazard function is given by</p>
+f(t|a,b) = \frac a b \bigg(\frac t b\bigg)^{a - 1} e^{-\big(\frac t
+b\big)^a} \quad t &gt; 0
+\]</span> where <span class="math inline">\(a\)</span> is the shape and
+<span class="math inline">\(b\)</span> the scale parameter. The
+corresponding hazard function is given by</p>
 <p><span class="math display">\[
 h(t|a,b) = \frac b a \bigg(\frac t a\bigg)^{b - 1} \ .
 \]</span></p>
-<p>The one-parameter exponential distribution is recovered as a special case when <span class="math inline">\(b = 1\)</span>. The Weibull distribution family adds flexibility in one important aspect since it allows the hazard rate to be either increasing (<span class="math inline">\(b&lt;1\)</span>) or decreasing (<span class="math inline">\(b&gt;1\)</span>) over time.</p>
+<p>The one-parameter exponential distribution is recovered as a special
+case when <span class="math inline">\(b = 1\)</span>. The Weibull
+distribution family adds flexibility in one important aspect since it
+allows the hazard rate to be either increasing (<span class="math inline">\(b&lt;1\)</span>) or decreasing (<span class="math inline">\(b&gt;1\)</span>) over time.</p>
 <p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
-<p>Combined with a three-state model, the Weibull-model provides quite some flexibility to model different disease progression characteristics without increasing model complexity too much. Compared to an exponential model, the three-state Weibull model has 7 instead of 4 parameters.</p>
-<p>Other two-parameter survival distributions like the log-normal or Gamma distribution are equally viable but the characteristics of their hazard functions either more intricate (non-monotonous) or less flexible than the Weibull distribution. Additionally, the Weibull distribution is the only distribution which can be interpreted both in terms of proportional hazards and accelerated failure times. Note that covariate modeling is not yet implemented in <code>oncomsm</code>. Realistically, proper model selection or the identification of more complex patterns in the hazard function are unfeasible with small sample sizes. The Weibull distribution is this primarily chosen due to the intuitive interpretation of its parameters.</p>
-<p>In settings with larger sample sizes model selection is more feasible. The <a href="https://cran.r-project.org/package=flexsurv"><code>flexsurv</code></a> package covers a large number of common parametric survival models and supports multi-state models as well.</p>
+<p>Combined with a three-state model, the Weibull-model provides quite
+some flexibility to model different disease progression characteristics
+without increasing model complexity too much. Compared to an exponential
+model, the three-state Weibull model has 7 instead of 4 parameters.</p>
+<p>Other two-parameter survival distributions like the log-normal or
+Gamma distribution are equally viable but the characteristics of their
+hazard functions either more intricate (non-monotonous) or less flexible
+than the Weibull distribution. Additionally, the Weibull distribution is
+the only distribution which can be interpreted both in terms of
+proportional hazards and accelerated failure times. Note that covariate
+modeling is not yet implemented in <code>oncomsm</code>. Realistically,
+proper model selection or the identification of more complex patterns in
+the hazard function are unfeasible with small sample sizes. The Weibull
+distribution is this primarily chosen due to the intuitive
+interpretation of its parameters.</p>
+<p>In settings with larger sample sizes model selection is more
+feasible. The <a href="https://cran.r-project.org/package=flexsurv"><code>flexsurv</code></a>
+package covers a large number of common parametric survival models and
+supports multi-state models as well.</p>
 </div>
 <div id="parameterization-and-prior-classes" class="section level2">
 <h2>Parameterization and prior classes</h2>
-<p>Both scale and shape are of interest. Hence, the reference prior for a Weibull distribution is proportional to <span class="math inline">\(1/(a\, b)\)</span> (see, <a href="https://doi.org/10.1016/S0378-3758(96)00155-3">A note on non-informative priors for Weibull distributions</a>). Any differentiable re-parameterization <span class="math inline">\(g^{-1}:g(a,b)\mapsto (a,b)\)</span> with Jacobian absolute determinant <span class="math inline">\(1/(a\,b)\)</span> thus leads to an (improper) uniform reference prior via pull-back of the reference prior on <span class="math inline">\((a,b)\)</span>. The transformation given by</p>
+<p>Both scale and shape are of interest. Hence, the reference prior for
+a Weibull distribution is proportional to <span class="math inline">\(1/(a\, b)\)</span> (see, <a href="https://doi.org/10.1016/S0378-3758(96)00155-3">A note on
+non-informative priors for Weibull distributions</a>). Any
+differentiable re-parameterization <span class="math inline">\(g^{-1}:g(a,b)\mapsto (a,b)\)</span> with Jacobian
+absolute determinant <span class="math inline">\(1/(a\,b)\)</span> thus
+leads to an (improper) uniform reference prior via pull-back of the
+reference prior on <span class="math inline">\((a,b)\)</span>. The
+transformation given by</p>
 <p><span class="math display">\[
-g^{-1}(a, b) = \Bigg(\ \log\bigg(\ \underbrace{a \log(2)^{1/b}}_{\text{median}} \ \bigg),\ \log(b) \ \Bigg)
+g^{-1}(a, b) = \Bigg(\ \log\bigg(\ \underbrace{a
+\log(2)^{1/b}}_{\text{median}} \ \bigg),\ \log(b) \ \Bigg)
 \]</span></p>
-<p>that transforms scale <span class="math inline">\(a\)</span> and shape <span class="math inline">\(b\)</span> to the log-median and log-shape has Jacobian</p>
+<p>that transforms scale <span class="math inline">\(a\)</span> and
+shape <span class="math inline">\(b\)</span> to the log-median and
+log-shape has Jacobian</p>
 <p><span class="math display">\[
 \begin{pmatrix}
   \frac 1 a &amp; - \frac{\log(\log(2))}{b^2} \\
   0 &amp; \frac 1 b
 \end{pmatrix}
 \]</span></p>
-<p>and thus determinant <span class="math inline">\(1/(a\,b)\)</span>. In this sense, the median and log-shape are a natural parameterization for the Weibull distribution since the reference and Jeffreys prior coincide to the (improper) uniform distribution on this parameter space. A practical benefit of using the median instead of the raw scale parameter is that it has a more direct interpretation for practitioners.</p>
-<p>To stabilize inference in settings with little data, it is often advisable to use weakly informative priors instead of completely non-informative ones. If one is only willing to specify the first two moments for a distribution on <span class="math inline">\(\mathbb{R}^2\)</span>, the normal distribution is the unique maximum entropy distribution. Assuming independence of shape and median, this implies that log-normal priors on both shape and median are a natural weakly-informative class of priors for the Weibull distribution.</p>
-<p>For the response probability <span class="math inline">\(p\)</span>, a mixture prior consisting of a <span class="math inline">\(\operatorname{Beta}(\alpha,\beta)\)</span> component with weight <span class="math inline">\(1-\eta\)</span> and a uniform component, <span class="math inline">\(\operatorname{Beta}(1,1)\)</span>, with weight <span class="math inline">\(\eta\)</span> is suggested.</p>
+<p>and thus determinant <span class="math inline">\(1/(a\,b)\)</span>.
+In this sense, the median and log-shape are a natural parameterization
+for the Weibull distribution since the reference and Jeffreys prior
+coincide to the (improper) uniform distribution on this parameter space.
+A practical benefit of using the median instead of the raw scale
+parameter is that it has a more direct interpretation for
+practitioners.</p>
+<p>To stabilize inference in settings with little data, it is often
+advisable to use weakly informative priors instead of completely
+non-informative ones. If one is only willing to specify the first two
+moments for a distribution on <span class="math inline">\(\mathbb{R}^2\)</span>, the normal distribution is
+the unique maximum entropy distribution. Assuming independence of shape
+and median, this implies that log-normal priors on both shape and median
+are a natural weakly-informative class of priors for the Weibull
+distribution.</p>
+<p>For the response probability <span class="math inline">\(p\)</span>,
+a mixture prior consisting of a <span class="math inline">\(\operatorname{Beta}(\alpha,\beta)\)</span>
+component with weight <span class="math inline">\(1-\eta\)</span> and a
+uniform component, <span class="math inline">\(\operatorname{Beta}(1,1)\)</span>, with weight
+<span class="math inline">\(\eta\)</span> is suggested.</p>
 </div>
 <div id="choice-of-hyperparameters" class="section level2">
 <h2>Choice of hyperparameters</h2>
-<p>Directly specifying the mean and variance of the lognormal priors for shape and median time to event can be unintuitive. Instead, the <span class="math inline">\(0.05\)</span> and <span class="math inline">\(0.95\)</span> quantiles of the median and shape can be specified. These two constraints are then sufficient to identify the mean and variance parameters of the log-normal distribution.</p>
-<p>If, for instance, very little is known about the median time to response but it is implausible that the median is lower than 1 or greater than 36 months, the lognormal prior on median time to response is depicted in the following plot.</p>
+<p>Directly specifying the mean and variance of the lognormal priors for
+shape and median time to event can be unintuitive. Instead, the <span class="math inline">\(0.05\)</span> and <span class="math inline">\(0.95\)</span> quantiles of the median and shape
+can be specified. These two constraints are then sufficient to identify
+the mean and variance parameters of the log-normal distribution.</p>
+<p>If, for instance, very little is known about the median time to
+response but it is implausible that the median is lower than 1 or
+greater than 36 months, the lognormal prior on median time to response
+is depicted in the following plot.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> oncomsm<span class="sc">:::</span><span class="fu">get_mu_sigma</span>(<span class="dv">1</span>, <span class="dv">36</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>median_transition_time <span class="ot">&lt;-</span> t</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
@@ -200,9 +458,20 @@ g^{-1}(a, b) = \Bigg(\ \log\bigg(\ \underbrace{a \log(2)^{1/b}}_{\text{median}} 
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(median_transition_time, pdf) <span class="sc">+</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div>
 <p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
-<p>This is the default vague prior on the median time to next event for all three transitions.</p>
-<p>The choice of the prior on the shape is more difficult since the shape parameter is harder to identify from only a few (interval censored) data points per transition. To avoid convergence issues <code>oncomsm</code> uses a default of a lognormal prior with 5% quantile 0.9 and 95% quantile 2.5. If changes in the hazards over time are expected, it can make sense to relax the prior at the risk of more divergent transitions during sampling. A small number of divergent transitions can usually be tolerated (default: up to 10%). In practice, it is always possible to reduce the prior variability post-hoc or to fine-tune the MCMC parameters to obtain stable inference[<a href="https://mc-stan.org/docs/2_19/reference-manual/divergent-transitions" class="uri">https://mc-stan.org/docs/2_19/reference-manual/divergent-transitions</a>].</p>
-<p>The following plot shows the variability in shape for fixed scale of this default prior.</p>
+<p>This is the default vague prior on the median time to next event for
+all three transitions.</p>
+<p>The choice of the prior on the shape is more difficult since the
+shape parameter is harder to identify from only a few (interval
+censored) data points per transition. To avoid convergence issues
+<code>oncomsm</code> uses a default of a lognormal prior with 5%
+quantile 0.9 and 95% quantile 2.5. If changes in the hazards over time
+are expected, it can make sense to relax the prior at the risk of more
+divergent transitions during sampling. A small number of divergent
+transitions can usually be tolerated (default: up to 10%). In practice,
+it is always possible to reduce the prior variability post-hoc or to
+fine-tune the MCMC parameters to obtain stable inference[<a href="https://mc-stan.org/docs/2_19/reference-manual/divergent-transitions" class="uri">https://mc-stan.org/docs/2_19/reference-manual/divergent-transitions</a>].</p>
+<p>The following plot shows the variability in shape for fixed scale of
+this default prior.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> oncomsm<span class="sc">:::</span><span class="fu">get_mu_sigma</span>(<span class="fl">0.9</span>, <span class="fl">2.5</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>shape <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">5</span>, <span class="at">length.out =</span> <span class="dv">100</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(251L)</span>
@@ -225,7 +494,8 @@ g^{-1}(a, b) = \Bigg(\ \log\bigg(\ \underbrace{a \log(2)^{1/b}}_{\text{median}} 
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(shape, pdf) <span class="sc">+</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div>
 <p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
-<p>A sample from the joint prior then reflects the overall variability.</p>
+<p>A sample from the joint prior then reflects the overall
+variability.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(251L)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">b =</span> <span class="fu">rlnorm</span>(<span class="dv">100</span>, oncomsm<span class="sc">:::</span><span class="fu">get_mu_sigma</span>(<span class="fl">0.75</span>, <span class="dv">3</span>)<span class="sc">$</span>mu,</span>

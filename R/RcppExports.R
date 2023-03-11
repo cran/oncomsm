@@ -5,8 +5,8 @@ conditional_response_probability_srp <- function(t, p, shape_response, shape_pro
     .Call(`_oncomsm_conditional_response_probability_srp`, t, p, shape_response, shape_progression, scale_response, scale_progression)
 }
 
-impute_srp_model <- function(df, response_probabilities, shapes, scales, visit_spacing, max_time) {
-    .Call(`_oncomsm_impute_srp_model`, df, response_probabilities, shapes, scales, visit_spacing, max_time)
+impute_srp_model <- function(df, response_probabilities, shapes, scales, visit_spacing, max_time, states) {
+    .Call(`_oncomsm_impute_srp_model`, df, response_probabilities, shapes, scales, visit_spacing, max_time, states)
 }
 
 pfs <- function(t, p, shapes, scales) {

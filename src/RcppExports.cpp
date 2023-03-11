@@ -28,8 +28,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // impute_srp_model
-DataFrame impute_srp_model(DataFrame df, NumericVector response_probabilities, NumericMatrix shapes, NumericMatrix scales, NumericVector visit_spacing, double max_time);
-RcppExport SEXP _oncomsm_impute_srp_model(SEXP dfSEXP, SEXP response_probabilitiesSEXP, SEXP shapesSEXP, SEXP scalesSEXP, SEXP visit_spacingSEXP, SEXP max_timeSEXP) {
+DataFrame impute_srp_model(DataFrame df, NumericVector response_probabilities, NumericMatrix shapes, NumericMatrix scales, NumericVector visit_spacing, double max_time, CharacterVector states);
+RcppExport SEXP _oncomsm_impute_srp_model(SEXP dfSEXP, SEXP response_probabilitiesSEXP, SEXP shapesSEXP, SEXP scalesSEXP, SEXP visit_spacingSEXP, SEXP max_timeSEXP, SEXP statesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -39,7 +39,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericMatrix >::type scales(scalesSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type visit_spacing(visit_spacingSEXP);
     Rcpp::traits::input_parameter< double >::type max_time(max_timeSEXP);
-    rcpp_result_gen = Rcpp::wrap(impute_srp_model(df, response_probabilities, shapes, scales, visit_spacing, max_time));
+    Rcpp::traits::input_parameter< CharacterVector >::type states(statesSEXP);
+    rcpp_result_gen = Rcpp::wrap(impute_srp_model(df, response_probabilities, shapes, scales, visit_spacing, max_time, states));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -76,7 +77,7 @@ RcppExport SEXP _rcpp_module_boot_stan_fit4srp_model_simple_mod();
 
 static const R_CallMethodDef CallEntries[] = {
     {"_oncomsm_conditional_response_probability_srp", (DL_FUNC) &_oncomsm_conditional_response_probability_srp, 6},
-    {"_oncomsm_impute_srp_model", (DL_FUNC) &_oncomsm_impute_srp_model, 6},
+    {"_oncomsm_impute_srp_model", (DL_FUNC) &_oncomsm_impute_srp_model, 7},
     {"_oncomsm_pfs", (DL_FUNC) &_oncomsm_pfs, 4},
     {"_oncomsm_rtruncweibull", (DL_FUNC) &_oncomsm_rtruncweibull, 4},
     {"_rcpp_module_boot_stan_fit4srp_model_simple_mod", (DL_FUNC) &_rcpp_module_boot_stan_fit4srp_model_simple_mod, 0},

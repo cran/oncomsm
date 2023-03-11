@@ -161,6 +161,25 @@ smpl_posterior %>%
     q75 = quantile(value, probs = .75)
   )
 
+## -----------------------------------------------------------------------------
+mdl2 <- create_srpmodel(
+  A = define_srp_prior(),
+  B = define_srp_prior()
+)
+smpl_posterior2 <- sample_posterior(mdl2, tbl_data_interim, seed = 43L)
+# plot under posterior
+plot(mdl2, parameter_sample = smpl_posterior2, confidence = 0.9)
+# calculate posterior quantiles of response probability
+smpl_posterior2 %>%
+  parameter_sample_to_tibble(mdl2, .) %>%
+  filter(parameter == "p") %>%
+  group_by(group_id) %>%
+  summarize(
+    p_posterior_mean = median(value),
+    q25 = quantile(value, probs = .25),
+    q75 = quantile(value, probs = .75)
+  )
+
 ## ----session-info-------------------------------------------------------------
 sessionInfo()
 

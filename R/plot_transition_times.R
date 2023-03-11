@@ -20,9 +20,10 @@
 #' @seealso [plot_pfs()] [plot_response_probability()]
 #'
 #' @examples
+#' \dontrun{
 #' mdl <- create_srpmodel(A = define_srp_prior())
 #' plot_transition_times(mdl)
-#'
+#' }
 #' @export
 plot_transition_times <- function(model, # nolint
                                   parameter_sample = NULL,
@@ -100,6 +101,7 @@ plot_transition_times <- function(model, # nolint
                                                color = .data$group_id)) +
     ggplot2::labs(x = "time to next event", y = "'Survival' fraction") +
     ggplot2::scale_color_discrete("") +
+    ggplot2::scale_fill_discrete("") +
     ggplot2::scale_y_continuous(
       limits = c(0, 1),
       breaks = seq(0, 1, by = .1)

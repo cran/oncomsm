@@ -14,9 +14,10 @@
 #' @return A `patchwork` object, see [patchwork::patchwork]
 #'
 #' @examples
+#' \dontrun{
 #' mdl <- create_srpmodel(A = define_srp_prior())
 #' plot(mdl)
-#'
+#' }
 #' @seealso [plot_pfs()] [plot_transition_times()]
 #' [plot_response_probability()]
 #'

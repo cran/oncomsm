@@ -75,7 +75,7 @@ define_srp_prior <- function(
   p_min = 0.0,
   p_max = 1.0,
   median_t_q05 = c(1, 1, 1),
-  median_t_q95 = c(36, 26, 36),
+  median_t_q95 = c(60, 60, 60),
   shape_q05 = rep(0.9, 3),
   shape_q95 = rep(2.5, 3),
   visit_spacing = 1, # months
@@ -105,6 +105,10 @@ define_srp_prior <- function(
 #' group labels
 #' @param maximal_time the maximal overall runtime of the trial as measured from
 #' the first visit of any group. No visits past this point are sampled.
+#' @param states character vector of three states (initial, intermediate,
+#'   terminal)
+#' @param censored string, indicator of premature censoring events;
+#' no data is imputed after this point.
 #'
 #' @examples
 #' # a model with two groups and different priors on the respective response
@@ -119,7 +123,9 @@ define_srp_prior <- function(
 #' @export
 create_srpmodel <- function(
   ...,
-  maximal_time = 10 * 12
+  maximal_time = 10 * 12,
+  states = c("stable", "response", "progression"),
+  censored = "EOF"
 ) {
   group_priors <- list(...)
   group_id <- names(group_priors)
@@ -160,7 +166,8 @@ create_srpmodel <- function(
       visit_spacing = visit_spacing,
       recruitment_rate = recruitment_rate,
       stan_model = stanmodels$srp_model_simple,
-      states = c("stable", "response", "progression"),
+      states = states,
+      censored = censored,
       prior = list(
         p = p, median_t = median_t, shape = shape
       )

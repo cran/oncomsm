@@ -19,9 +19,10 @@
 #' @seealso [plot_transition_times()] [plot_response_probability()]
 #'
 #' @examples
+#' \dontrun{
 #' mdl <- create_srpmodel(A = define_srp_prior())
 #' plot_pfs(mdl)
-#'
+#' }
 #' @export
 plot_pfs <- function(model, # nolint
                      parameter_sample = NULL,
