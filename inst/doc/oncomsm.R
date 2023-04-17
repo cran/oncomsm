@@ -42,7 +42,7 @@ print(mdl)
 smpl_prior <- sample_prior(mdl, seed = 36L)
 
 # plot(mdl) also works but need to resample prior further below
-plot(mdl, parameter_sample = smpl_prior, confidence = 0.9)
+plot(mdl, parameter_sample = smpl_prior, confidence = 0.75)
 
 ## ----prior-predictive---------------------------------------------------------
 tbl_prior_predictive <- sample_predictive(
@@ -149,7 +149,7 @@ tbl_data_interim %>%
 ## -----------------------------------------------------------------------------
 smpl_posterior <- sample_posterior(mdl, tbl_data_interim, seed = 43L)
 # plot under posterior
-plot(mdl, parameter_sample = smpl_posterior, confidence = 0.9)
+plot(mdl, parameter_sample = smpl_posterior, confidence = 0.75)
 # calculate posterior quantiles of response probability
 smpl_posterior %>%
   parameter_sample_to_tibble(mdl, .) %>%
@@ -168,7 +168,7 @@ mdl2 <- create_srpmodel(
 )
 smpl_posterior2 <- sample_posterior(mdl2, tbl_data_interim, seed = 43L)
 # plot under posterior
-plot(mdl2, parameter_sample = smpl_posterior2, confidence = 0.9)
+plot(mdl2, parameter_sample = smpl_posterior2, confidence = 0.75)
 # calculate posterior quantiles of response probability
 smpl_posterior2 %>%
   parameter_sample_to_tibble(mdl2, .) %>%

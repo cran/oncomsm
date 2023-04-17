@@ -19,7 +19,7 @@ static int current_statement_begin__;
 stan::io::program_reader prog_reader__() {
     stan::io::program_reader reader;
     reader.add_event(0, 0, "start", "model_srp_model_simple");
-    reader.add_event(159, 157, "end", "model_srp_model_simple");
+    reader.add_event(161, 159, "end", "model_srp_model_simple");
     return reader;
 }
 template <bool propto, typename T0__, typename T1__, typename T2__, typename T3__, typename T4__, typename T5__>
@@ -40,11 +40,11 @@ beta_mix_trunc_lpdf(const T0__& p,
     try {
         {
         current_statement_begin__ = 6;
-        local_scalar_t__ eps(DUMMY_VAR__);
-        (void) eps;  // dummy to suppress unused var warning
-        stan::math::initialize(eps, DUMMY_VAR__);
-        stan::math::fill(eps, DUMMY_VAR__);
-        stan::math::assign(eps,1e-6);
+        local_scalar_t__ log_eps(DUMMY_VAR__);
+        (void) log_eps;  // dummy to suppress unused var warning
+        stan::math::initialize(log_eps, DUMMY_VAR__);
+        stan::math::fill(log_eps, DUMMY_VAR__);
+        stan::math::assign(log_eps,stan::math::log(1e-6));
         current_statement_begin__ = 7;
         local_scalar_t__ a(DUMMY_VAR__);
         (void) a;  // dummy to suppress unused var warning
@@ -57,27 +57,39 @@ beta_mix_trunc_lpdf(const T0__& p,
         stan::math::initialize(b, DUMMY_VAR__);
         stan::math::fill(b, DUMMY_VAR__);
         stan::math::assign(b,((1 - mean) * n));
+        current_statement_begin__ = 9;
+        local_scalar_t__ log1m_eta(DUMMY_VAR__);
+        (void) log1m_eta;  // dummy to suppress unused var warning
+        stan::math::initialize(log1m_eta, DUMMY_VAR__);
+        stan::math::fill(log1m_eta, DUMMY_VAR__);
+        stan::math::assign(log1m_eta,log1m(eta));
         current_statement_begin__ = 10;
+        local_scalar_t__ log_eta(DUMMY_VAR__);
+        (void) log_eta;  // dummy to suppress unused var warning
+        stan::math::initialize(log_eta, DUMMY_VAR__);
+        stan::math::fill(log_eta, DUMMY_VAR__);
+        stan::math::assign(log_eta,stan::math::log(eta));
+        current_statement_begin__ = 12;
         local_scalar_t__ norm(DUMMY_VAR__);
         (void) norm;  // dummy to suppress unused var warning
         stan::math::initialize(norm, DUMMY_VAR__);
         stan::math::fill(norm, DUMMY_VAR__);
-        stan::math::assign(norm,(((1 - eta) * (beta_cdf(upper, a, b) - beta_cdf(lower, a, b))) + (eta * (upper - lower))));
-        current_statement_begin__ = 12;
-        local_scalar_t__ pdf(DUMMY_VAR__);
-        (void) pdf;  // dummy to suppress unused var warning
-        stan::math::initialize(pdf, DUMMY_VAR__);
-        stan::math::fill(pdf, DUMMY_VAR__);
-        stan::math::assign(pdf,((((1 - eta) * stan::math::exp(beta_log(p, a, b))) + eta) / norm));
-        current_statement_begin__ = 13;
+        stan::math::assign(norm,log_sum_exp((log1m_eta + log_diff_exp(beta_cdf_log(upper, a, b), beta_cdf_log(lower, a, b))), (log_eta + stan::math::log((upper - lower)))));
+        current_statement_begin__ = 14;
+        local_scalar_t__ lpdf(DUMMY_VAR__);
+        (void) lpdf;  // dummy to suppress unused var warning
+        stan::math::initialize(lpdf, DUMMY_VAR__);
+        stan::math::fill(lpdf, DUMMY_VAR__);
+        stan::math::assign(lpdf,(log_sum_exp((log1m_eta + beta_log(p, a, b)), log_eta) - norm));
+        current_statement_begin__ = 15;
         if (as_bool((primitive_value(logical_lt(p, lower)) || primitive_value(logical_gt(p, upper))))) {
-            current_statement_begin__ = 14;
+            current_statement_begin__ = 16;
             std::stringstream errmsg_stream__;
             errmsg_stream__ << p;
             throw std::domain_error(errmsg_stream__.str());
         }
-        current_statement_begin__ = 16;
-        return stan::math::promote_scalar<fun_return_scalar_t__>(stan::math::log((pdf + eps)));
+        current_statement_begin__ = 18;
+        return stan::math::promote_scalar<fun_return_scalar_t__>(log_sum_exp(lpdf, log_eps));
         }
     } catch (const std::exception& e) {
         stan::lang::rethrow_located(e, current_statement_begin__, prog_reader__());
@@ -160,35 +172,35 @@ public:
         (void) DUMMY_VAR__;  // suppress unused var warning
         try {
             // initialize data block variables from context__
-            current_statement_begin__ = 25;
+            current_statement_begin__ = 27;
             context__.validate_dims("data initialization", "M_groups", "int", context__.to_vec());
             M_groups = int(0);
             vals_i__ = context__.vals_i("M_groups");
             pos__ = 0;
             M_groups = vals_i__[pos__++];
             check_greater_or_equal(function__, "M_groups", M_groups, 1);
-            current_statement_begin__ = 26;
+            current_statement_begin__ = 28;
             context__.validate_dims("data initialization", "N", "int", context__.to_vec());
             N = int(0);
             vals_i__ = context__.vals_i("N");
             pos__ = 0;
             N = vals_i__[pos__++];
             check_greater_or_equal(function__, "N", N, 0);
-            current_statement_begin__ = 27;
+            current_statement_begin__ = 29;
             context__.validate_dims("data initialization", "N_subjects", "int", context__.to_vec());
             N_subjects = int(0);
             vals_i__ = context__.vals_i("N_subjects");
             pos__ = 0;
             N_subjects = vals_i__[pos__++];
             check_greater_or_equal(function__, "N_subjects", N_subjects, 0);
-            current_statement_begin__ = 28;
+            current_statement_begin__ = 30;
             context__.validate_dims("data initialization", "maximal_time", "double", context__.to_vec());
             maximal_time = double(0);
             vals_r__ = context__.vals_r("maximal_time");
             pos__ = 0;
             maximal_time = vals_r__[pos__++];
             check_greater_or_equal(function__, "maximal_time", maximal_time, 0);
-            current_statement_begin__ = 30;
+            current_statement_begin__ = 32;
             validate_non_negative_index("subject_id", "N", N);
             context__.validate_dims("data initialization", "subject_id", "int", context__.to_vec(N));
             subject_id = std::vector<int>(N, int(0));
@@ -202,7 +214,7 @@ public:
             for (size_t i_0__ = 0; i_0__ < subject_id_i_0_max__; ++i_0__) {
                 check_greater_or_equal(function__, "subject_id[i_0__]", subject_id[i_0__], 1);
             }
-            current_statement_begin__ = 31;
+            current_statement_begin__ = 33;
             validate_non_negative_index("group_id", "N", N);
             context__.validate_dims("data initialization", "group_id", "int", context__.to_vec(N));
             group_id = std::vector<int>(N, int(0));
@@ -216,7 +228,7 @@ public:
             for (size_t i_0__ = 0; i_0__ < group_id_i_0_max__; ++i_0__) {
                 check_greater_or_equal(function__, "group_id[i_0__]", group_id[i_0__], 1);
             }
-            current_statement_begin__ = 32;
+            current_statement_begin__ = 34;
             validate_non_negative_index("from", "N", N);
             context__.validate_dims("data initialization", "from", "int", context__.to_vec(N));
             from = std::vector<int>(N, int(0));
@@ -231,7 +243,7 @@ public:
                 check_greater_or_equal(function__, "from[i_0__]", from[i_0__], 1);
                 check_less_or_equal(function__, "from[i_0__]", from[i_0__], 2);
             }
-            current_statement_begin__ = 33;
+            current_statement_begin__ = 35;
             validate_non_negative_index("to", "N", N);
             context__.validate_dims("data initialization", "to", "int", context__.to_vec(N));
             to = std::vector<int>(N, int(0));
@@ -246,7 +258,7 @@ public:
                 check_greater_or_equal(function__, "to[i_0__]", to[i_0__], 2);
                 check_less_or_equal(function__, "to[i_0__]", to[i_0__], 4);
             }
-            current_statement_begin__ = 35;
+            current_statement_begin__ = 37;
             validate_non_negative_index("t_min", "N", N);
             context__.validate_dims("data initialization", "t_min", "double", context__.to_vec(N));
             t_min = std::vector<double>(N, double(0));
@@ -260,7 +272,7 @@ public:
             for (size_t i_0__ = 0; i_0__ < t_min_i_0_max__; ++i_0__) {
                 check_greater_or_equal(function__, "t_min[i_0__]", t_min[i_0__], 0);
             }
-            current_statement_begin__ = 36;
+            current_statement_begin__ = 38;
             validate_non_negative_index("t_max", "N", N);
             context__.validate_dims("data initialization", "t_max", "double", context__.to_vec(N));
             t_max = std::vector<double>(N, double(0));
@@ -274,7 +286,7 @@ public:
             for (size_t i_0__ = 0; i_0__ < t_max_i_0_max__; ++i_0__) {
                 check_greater_or_equal(function__, "t_max[i_0__]", t_max[i_0__], 0);
             }
-            current_statement_begin__ = 39;
+            current_statement_begin__ = 41;
             validate_non_negative_index("p_mean", "M_groups", M_groups);
             context__.validate_dims("data initialization", "p_mean", "double", context__.to_vec(M_groups));
             p_mean = std::vector<double>(M_groups, double(0));
@@ -289,7 +301,7 @@ public:
                 check_greater_or_equal(function__, "p_mean[i_0__]", p_mean[i_0__], stan::math::machine_precision());
                 check_less_or_equal(function__, "p_mean[i_0__]", p_mean[i_0__], (1 - stan::math::machine_precision()));
             }
-            current_statement_begin__ = 40;
+            current_statement_begin__ = 42;
             validate_non_negative_index("p_n", "M_groups", M_groups);
             context__.validate_dims("data initialization", "p_n", "double", context__.to_vec(M_groups));
             p_n = std::vector<double>(M_groups, double(0));
@@ -303,7 +315,7 @@ public:
             for (size_t i_0__ = 0; i_0__ < p_n_i_0_max__; ++i_0__) {
                 check_greater_or_equal(function__, "p_n[i_0__]", p_n[i_0__], stan::math::machine_precision());
             }
-            current_statement_begin__ = 41;
+            current_statement_begin__ = 43;
             validate_non_negative_index("p_eta", "M_groups", M_groups);
             context__.validate_dims("data initialization", "p_eta", "double", context__.to_vec(M_groups));
             p_eta = std::vector<double>(M_groups, double(0));
@@ -318,7 +330,7 @@ public:
                 check_greater_or_equal(function__, "p_eta[i_0__]", p_eta[i_0__], 0.0);
                 check_less_or_equal(function__, "p_eta[i_0__]", p_eta[i_0__], 1.0);
             }
-            current_statement_begin__ = 42;
+            current_statement_begin__ = 44;
             validate_non_negative_index("p_min", "M_groups", M_groups);
             context__.validate_dims("data initialization", "p_min", "double", context__.to_vec(M_groups));
             p_min = std::vector<double>(M_groups, double(0));
@@ -333,7 +345,7 @@ public:
                 check_greater_or_equal(function__, "p_min[i_0__]", p_min[i_0__], 0.0);
                 check_less_or_equal(function__, "p_min[i_0__]", p_min[i_0__], 1.0);
             }
-            current_statement_begin__ = 43;
+            current_statement_begin__ = 45;
             validate_non_negative_index("p_max", "M_groups", M_groups);
             context__.validate_dims("data initialization", "p_max", "double", context__.to_vec(M_groups));
             p_max = std::vector<double>(M_groups, double(0));
@@ -348,7 +360,7 @@ public:
                 check_greater_or_equal(function__, "p_max[i_0__]", p_max[i_0__], 0.0);
                 check_less_or_equal(function__, "p_max[i_0__]", p_max[i_0__], 1.0);
             }
-            current_statement_begin__ = 45;
+            current_statement_begin__ = 47;
             validate_non_negative_index("shape_mu", "M_groups", M_groups);
             validate_non_negative_index("shape_mu", "3", 3);
             context__.validate_dims("data initialization", "shape_mu", "double", context__.to_vec(M_groups,3));
@@ -362,7 +374,7 @@ public:
                     shape_mu[k_0__][k_1__] = vals_r__[pos__++];
                 }
             }
-            current_statement_begin__ = 46;
+            current_statement_begin__ = 48;
             validate_non_negative_index("shape_sigma", "M_groups", M_groups);
             validate_non_negative_index("shape_sigma", "3", 3);
             context__.validate_dims("data initialization", "shape_sigma", "double", context__.to_vec(M_groups,3));
@@ -383,7 +395,7 @@ public:
                     check_greater_or_equal(function__, "shape_sigma[i_0__][i_1__]", shape_sigma[i_0__][i_1__], stan::math::machine_precision());
                 }
             }
-            current_statement_begin__ = 48;
+            current_statement_begin__ = 50;
             validate_non_negative_index("median_t_mu", "M_groups", M_groups);
             validate_non_negative_index("median_t_mu", "3", 3);
             context__.validate_dims("data initialization", "median_t_mu", "double", context__.to_vec(M_groups,3));
@@ -397,7 +409,7 @@ public:
                     median_t_mu[k_0__][k_1__] = vals_r__[pos__++];
                 }
             }
-            current_statement_begin__ = 49;
+            current_statement_begin__ = 51;
             validate_non_negative_index("median_t_sigma", "M_groups", M_groups);
             validate_non_negative_index("median_t_sigma", "3", 3);
             context__.validate_dims("data initialization", "median_t_sigma", "double", context__.to_vec(M_groups,3));
@@ -424,14 +436,14 @@ public:
             // validate, set parameter ranges
             num_params_r__ = 0U;
             param_ranges_i__.clear();
-            current_statement_begin__ = 57;
+            current_statement_begin__ = 59;
             validate_non_negative_index("shape", "M_groups", M_groups);
             validate_non_negative_index("shape", "3", 3);
             num_params_r__ += ((1 * M_groups) * 3);
-            current_statement_begin__ = 58;
+            current_statement_begin__ = 60;
             validate_non_negative_index("p_raw", "M_groups", M_groups);
             num_params_r__ += (1 * M_groups);
-            current_statement_begin__ = 59;
+            current_statement_begin__ = 61;
             validate_non_negative_index("median_t", "M_groups", M_groups);
             validate_non_negative_index("median_t", "3", 3);
             num_params_r__ += ((1 * M_groups) * 3);
@@ -452,7 +464,7 @@ public:
         (void) pos__; // dummy call to supress warning
         std::vector<double> vals_r__;
         std::vector<int> vals_i__;
-        current_statement_begin__ = 57;
+        current_statement_begin__ = 59;
         if (!(context__.contains_r("shape")))
             stan::lang::rethrow_located(std::runtime_error(std::string("Variable shape missing")), current_statement_begin__, prog_reader__());
         vals_r__ = context__.vals_r("shape");
@@ -479,7 +491,7 @@ public:
                 }
             }
         }
-        current_statement_begin__ = 58;
+        current_statement_begin__ = 60;
         if (!(context__.contains_r("p_raw")))
             stan::lang::rethrow_located(std::runtime_error(std::string("Variable p_raw missing")), current_statement_begin__, prog_reader__());
         vals_r__ = context__.vals_r("p_raw");
@@ -499,7 +511,7 @@ public:
                 stan::lang::rethrow_located(std::runtime_error(std::string("Error transforming variable p_raw: ") + e.what()), current_statement_begin__, prog_reader__());
             }
         }
-        current_statement_begin__ = 59;
+        current_statement_begin__ = 61;
         if (!(context__.contains_r("median_t")))
             stan::lang::rethrow_located(std::runtime_error(std::string("Variable median_t missing")), current_statement_begin__, prog_reader__());
         vals_r__ = context__.vals_r("median_t");
@@ -551,7 +563,7 @@ public:
         try {
             stan::io::reader<local_scalar_t__> in__(params_r__, params_i__);
             // model parameters
-            current_statement_begin__ = 57;
+            current_statement_begin__ = 59;
             std::vector<std::vector<local_scalar_t__> > shape;
             size_t shape_d_0_max__ = M_groups;
             size_t shape_d_1_max__ = 3;
@@ -565,7 +577,7 @@ public:
                         shape[d_0__].push_back(in__.scalar_lb_constrain(0.5));
                 }
             }
-            current_statement_begin__ = 58;
+            current_statement_begin__ = 60;
             std::vector<local_scalar_t__> p_raw;
             size_t p_raw_d_0_max__ = M_groups;
             p_raw.reserve(p_raw_d_0_max__);
@@ -575,7 +587,7 @@ public:
                 else
                     p_raw.push_back(in__.scalar_lub_constrain(0, 1));
             }
-            current_statement_begin__ = 59;
+            current_statement_begin__ = 61;
             std::vector<std::vector<local_scalar_t__> > median_t;
             size_t median_t_d_0_max__ = M_groups;
             size_t median_t_d_1_max__ = 3;
@@ -590,28 +602,28 @@ public:
                 }
             }
             // transformed parameters
-            current_statement_begin__ = 67;
+            current_statement_begin__ = 69;
             validate_non_negative_index("p", "M_groups", M_groups);
             std::vector<local_scalar_t__> p(M_groups, local_scalar_t__(0));
             stan::math::initialize(p, DUMMY_VAR__);
             stan::math::fill(p, DUMMY_VAR__);
-            current_statement_begin__ = 68;
+            current_statement_begin__ = 70;
             validate_non_negative_index("scale", "M_groups", M_groups);
             validate_non_negative_index("scale", "3", 3);
             std::vector<std::vector<local_scalar_t__> > scale(M_groups, std::vector<local_scalar_t__>(3, local_scalar_t__(0)));
             stan::math::initialize(scale, DUMMY_VAR__);
             stan::math::fill(scale, DUMMY_VAR__);
             // transformed parameters block statements
-            current_statement_begin__ = 70;
+            current_statement_begin__ = 72;
             for (int g = 1; g <= M_groups; ++g) {
-                current_statement_begin__ = 72;
+                current_statement_begin__ = 74;
                 stan::model::assign(p, 
                             stan::model::cons_list(stan::model::index_uni(g), stan::model::nil_index_list()), 
                             (get_base1(p_min, g, "p_min", 1) + ((get_base1(p_max, g, "p_max", 1) - get_base1(p_min, g, "p_min", 1)) * get_base1(p_raw, g, "p_raw", 1))), 
                             "assigning variable p");
-                current_statement_begin__ = 73;
+                current_statement_begin__ = 75;
                 for (int j = 1; j <= 3; ++j) {
-                    current_statement_begin__ = 75;
+                    current_statement_begin__ = 77;
                     stan::model::assign(scale, 
                                 stan::model::cons_list(stan::model::index_uni(g), stan::model::cons_list(stan::model::index_uni(j), stan::model::nil_index_list())), 
                                 (get_base1(get_base1(median_t, g, "median_t", 1), j, "median_t", 2) / pow(stan::math::log(2), (1 / get_base1(get_base1(shape, g, "shape", 1), j, "shape", 2)))), 
@@ -621,7 +633,7 @@ public:
             // validate transformed parameters
             const char* function__ = "validate transformed params";
             (void) function__;  // dummy to suppress unused var warning
-            current_statement_begin__ = 67;
+            current_statement_begin__ = 69;
             size_t p_k_0_max__ = M_groups;
             for (size_t k_0__ = 0; k_0__ < p_k_0_max__; ++k_0__) {
                 if (stan::math::is_uninitialized(p[k_0__])) {
@@ -630,7 +642,7 @@ public:
                     stan::lang::rethrow_located(std::runtime_error(std::string("Error initializing variable p: ") + msg__.str()), current_statement_begin__, prog_reader__());
                 }
             }
-            current_statement_begin__ = 68;
+            current_statement_begin__ = 70;
             size_t scale_k_0_max__ = M_groups;
             size_t scale_k_1_max__ = 3;
             for (size_t k_0__ = 0; k_0__ < scale_k_0_max__; ++k_0__) {
@@ -644,76 +656,76 @@ public:
             }
             // model body
             {
-            current_statement_begin__ = 86;
+            current_statement_begin__ = 88;
             local_scalar_t__ eps(DUMMY_VAR__);
             (void) eps;  // dummy to suppress unused var warning
             stan::math::initialize(eps, DUMMY_VAR__);
             stan::math::fill(eps, DUMMY_VAR__);
             stan::math::assign(eps,1e-6);
-            current_statement_begin__ = 87;
+            current_statement_begin__ = 89;
             int g(0);
             (void) g;  // dummy to suppress unused var warning
             stan::math::fill(g, std::numeric_limits<int>::min());
-            current_statement_begin__ = 88;
+            current_statement_begin__ = 90;
             int s(0);
             (void) s;  // dummy to suppress unused var warning
             stan::math::fill(s, std::numeric_limits<int>::min());
-            current_statement_begin__ = 91;
+            current_statement_begin__ = 93;
             validate_non_negative_index("t_jump_from_stable", "N_subjects", N_subjects);
             std::vector<local_scalar_t__  > t_jump_from_stable(N_subjects, local_scalar_t__(DUMMY_VAR__));
             stan::math::initialize(t_jump_from_stable, DUMMY_VAR__);
             stan::math::fill(t_jump_from_stable, DUMMY_VAR__);
-            current_statement_begin__ = 94;
+            current_statement_begin__ = 96;
             for (int gg = 1; gg <= M_groups; ++gg) {
-                current_statement_begin__ = 96;
+                current_statement_begin__ = 98;
                 lp_accum__.add(beta_mix_trunc_lpdf(get_base1(p, gg, "p", 1), get_base1(p_mean, gg, "p_mean", 1), get_base1(p_n, gg, "p_n", 1), get_base1(p_eta, gg, "p_eta", 1), get_base1(p_min, gg, "p_min", 1), get_base1(p_max, gg, "p_max", 1), pstream__));
-                current_statement_begin__ = 99;
+                current_statement_begin__ = 101;
                 for (int j = 1; j <= 3; ++j) {
-                    current_statement_begin__ = 100;
-                    lp_accum__.add(lognormal_log<propto__>(get_base1(get_base1(shape, gg, "shape", 1), j, "shape", 2), get_base1(get_base1(shape_mu, gg, "shape_mu", 1), j, "shape_mu", 2), get_base1(get_base1(shape_sigma, gg, "shape_sigma", 1), j, "shape_sigma", 2)));
                     current_statement_begin__ = 102;
+                    lp_accum__.add(lognormal_log<propto__>(get_base1(get_base1(shape, gg, "shape", 1), j, "shape", 2), get_base1(get_base1(shape_mu, gg, "shape_mu", 1), j, "shape_mu", 2), get_base1(get_base1(shape_sigma, gg, "shape_sigma", 1), j, "shape_sigma", 2)));
+                    current_statement_begin__ = 104;
                     lp_accum__.add(lognormal_log<propto__>(get_base1(get_base1(median_t, gg, "median_t", 1), j, "median_t", 2), get_base1(get_base1(median_t_mu, gg, "median_t_mu", 1), j, "median_t_mu", 2), get_base1(get_base1(median_t_sigma, gg, "median_t_sigma", 1), j, "median_t_sigma", 2)));
                 }
             }
-            current_statement_begin__ = 107;
+            current_statement_begin__ = 109;
             for (int i = 1; i <= N; ++i) {
-                current_statement_begin__ = 108;
-                stan::math::assign(s, get_base1(subject_id, i, "subject_id", 1));
-                current_statement_begin__ = 109;
-                stan::math::assign(g, get_base1(group_id, i, "group_id", 1));
                 current_statement_begin__ = 110;
+                stan::math::assign(s, get_base1(subject_id, i, "subject_id", 1));
+                current_statement_begin__ = 111;
+                stan::math::assign(g, get_base1(group_id, i, "group_id", 1));
+                current_statement_begin__ = 112;
                 if (as_bool(logical_eq(get_base1(from, i, "from", 1), 1))) {
-                    current_statement_begin__ = 114;
+                    current_statement_begin__ = 116;
                     stan::model::assign(t_jump_from_stable, 
                                 stan::model::cons_list(stan::model::index_uni(s), stan::model::nil_index_list()), 
                                 ((get_base1(t_min, i, "t_min", 1) + get_base1(t_max, i, "t_max", 1)) / 2), 
                                 "assigning variable t_jump_from_stable");
-                    current_statement_begin__ = 115;
+                    current_statement_begin__ = 117;
                     if (as_bool(logical_eq(get_base1(to, i, "to", 1), 2))) {
-                        current_statement_begin__ = 116;
+                        current_statement_begin__ = 118;
                         lp_accum__.add(stan::math::log(((get_base1(p, g, "p", 1) * (weibull_cdf((get_base1(t_max, i, "t_max", 1) + eps), get_base1(get_base1(shape, g, "shape", 1), 1, "shape", 2), get_base1(get_base1(scale, g, "scale", 1), 1, "scale", 2)) - weibull_cdf((get_base1(t_min, i, "t_min", 1) + eps), get_base1(get_base1(shape, g, "shape", 1), 1, "shape", 2), get_base1(get_base1(scale, g, "scale", 1), 1, "scale", 2)))) + eps)));
                     }
-                    current_statement_begin__ = 121;
+                    current_statement_begin__ = 123;
                     if (as_bool(logical_eq(get_base1(to, i, "to", 1), 3))) {
-                        current_statement_begin__ = 122;
+                        current_statement_begin__ = 124;
                         lp_accum__.add(stan::math::log((((1 - get_base1(p, g, "p", 1)) * (weibull_cdf((get_base1(t_max, i, "t_max", 1) + eps), get_base1(get_base1(shape, g, "shape", 1), 2, "shape", 2), get_base1(get_base1(scale, g, "scale", 1), 2, "scale", 2)) - weibull_cdf((get_base1(t_min, i, "t_min", 1) + eps), get_base1(get_base1(shape, g, "shape", 1), 2, "shape", 2), get_base1(get_base1(scale, g, "scale", 1), 2, "scale", 2)))) + eps)));
                     }
-                    current_statement_begin__ = 127;
+                    current_statement_begin__ = 129;
                     if (as_bool(logical_eq(get_base1(to, i, "to", 1), 4))) {
-                        current_statement_begin__ = 130;
+                        current_statement_begin__ = 132;
                         lp_accum__.add(stan::math::log((((get_base1(p, g, "p", 1) * (1 - weibull_cdf((get_base1(t_min, i, "t_min", 1) + eps), get_base1(get_base1(shape, g, "shape", 1), 1, "shape", 2), get_base1(get_base1(scale, g, "scale", 1), 1, "scale", 2)))) + ((1 - get_base1(p, g, "p", 1)) * (1 - weibull_cdf((get_base1(t_min, i, "t_min", 1) + eps), get_base1(get_base1(shape, g, "shape", 1), 2, "shape", 2), get_base1(get_base1(scale, g, "scale", 1), 2, "scale", 2))))) + eps)));
                     }
                 }
-                current_statement_begin__ = 136;
+                current_statement_begin__ = 138;
                 if (as_bool(logical_eq(get_base1(from, i, "from", 1), 2))) {
-                    current_statement_begin__ = 144;
+                    current_statement_begin__ = 146;
                     if (as_bool(logical_eq(get_base1(to, i, "to", 1), 3))) {
-                        current_statement_begin__ = 145;
+                        current_statement_begin__ = 147;
                         lp_accum__.add(stan::math::log(((weibull_cdf(((get_base1(t_max, i, "t_max", 1) - get_base1(t_jump_from_stable, s, "t_jump_from_stable", 1)) + eps), get_base1(get_base1(shape, g, "shape", 1), 3, "shape", 2), get_base1(get_base1(scale, g, "scale", 1), 3, "scale", 2)) - weibull_cdf(((get_base1(t_min, i, "t_min", 1) - get_base1(t_jump_from_stable, s, "t_jump_from_stable", 1)) + eps), get_base1(get_base1(shape, g, "shape", 1), 3, "shape", 2), get_base1(get_base1(scale, g, "scale", 1), 3, "scale", 2))) + eps)));
                     }
-                    current_statement_begin__ = 150;
+                    current_statement_begin__ = 152;
                     if (as_bool(logical_eq(get_base1(to, i, "to", 1), 4))) {
-                        current_statement_begin__ = 151;
+                        current_statement_begin__ = 153;
                         lp_accum__.add(stan::math::log(((1 - weibull_cdf(((get_base1(t_min, i, "t_min", 1) - get_base1(t_jump_from_stable, s, "t_jump_from_stable", 1)) + eps), get_base1(get_base1(shape, g, "shape", 1), 3, "shape", 2), get_base1(get_base1(scale, g, "scale", 1), 3, "scale", 2))) + eps)));
                     }
                 }
@@ -833,28 +845,28 @@ public:
         if (!include_tparams__ && !include_gqs__) return;
         try {
             // declare and define transformed parameters
-            current_statement_begin__ = 67;
+            current_statement_begin__ = 69;
             validate_non_negative_index("p", "M_groups", M_groups);
             std::vector<double> p(M_groups, double(0));
             stan::math::initialize(p, DUMMY_VAR__);
             stan::math::fill(p, DUMMY_VAR__);
-            current_statement_begin__ = 68;
+            current_statement_begin__ = 70;
             validate_non_negative_index("scale", "M_groups", M_groups);
             validate_non_negative_index("scale", "3", 3);
             std::vector<std::vector<double> > scale(M_groups, std::vector<double>(3, double(0)));
             stan::math::initialize(scale, DUMMY_VAR__);
             stan::math::fill(scale, DUMMY_VAR__);
             // do transformed parameters statements
-            current_statement_begin__ = 70;
+            current_statement_begin__ = 72;
             for (int g = 1; g <= M_groups; ++g) {
-                current_statement_begin__ = 72;
+                current_statement_begin__ = 74;
                 stan::model::assign(p, 
                             stan::model::cons_list(stan::model::index_uni(g), stan::model::nil_index_list()), 
                             (get_base1(p_min, g, "p_min", 1) + ((get_base1(p_max, g, "p_max", 1) - get_base1(p_min, g, "p_min", 1)) * get_base1(p_raw, g, "p_raw", 1))), 
                             "assigning variable p");
-                current_statement_begin__ = 73;
+                current_statement_begin__ = 75;
                 for (int j = 1; j <= 3; ++j) {
-                    current_statement_begin__ = 75;
+                    current_statement_begin__ = 77;
                     stan::model::assign(scale, 
                                 stan::model::cons_list(stan::model::index_uni(g), stan::model::cons_list(stan::model::index_uni(j), stan::model::nil_index_list())), 
                                 (get_base1(get_base1(median_t, g, "median_t", 1), j, "median_t", 2) / pow(stan::math::log(2), (1 / get_base1(get_base1(shape, g, "shape", 1), j, "shape", 2)))), 

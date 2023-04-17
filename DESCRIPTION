@@ -1,7 +1,7 @@
 Package: oncomsm
 Type: Package
 Title: Bayesian Multi-State Models for Early Oncology
-Version: 0.1.3
+Version: 0.1.4
 Authors@R: c(
     person("Kevin", "Kunzmann",
       role = c("aut", "cre"),
@@ -42,10 +42,10 @@ URL: https://boehringer-ingelheim.github.io/oncomsm/,
         https://github.com/Boehringer-Ingelheim/oncomsm
 BugReports: https://github.com/Boehringer-Ingelheim/oncomsm/issues
 NeedsCompilation: yes
-Packaged: 2023-03-11 09:52:11 UTC; kunzmann
+Packaged: 2023-04-16 23:24:10 UTC; kunzmann
 Author: Kevin Kunzmann [aut, cre] (<https://orcid.org/0000-0002-1140-7143>),
   Karthik Ananthakrishnan [ctb],
   Boehringer Ingelheim Ltd. [cph, fnd]
 Maintainer: Kevin Kunzmann <kevin.kunzmann@boehringer-ingelheim.com>
 Repository: CRAN
-Date/Publication: 2023-03-11 10:20:02 UTC
+Date/Publication: 2023-04-17 07:00:02 UTC
